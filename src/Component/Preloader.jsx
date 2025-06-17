@@ -7,7 +7,7 @@ const Preloader = () => {
       <div className="w-16 h-16 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
 
       {/* Pulsing Text */}
-      <h2 className="text-xl font-semibold text-yellow-500 animate-pulse">Loading...</h2>
+      <h2 className="text-xl font-semibold text-blue-500 animate-pulse">Loading...</h2>
     </div>
   );
 };
