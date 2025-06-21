@@ -108,8 +108,8 @@ const DissertationSection = () => {
       link: '/mobility', // Your route for Mobility Aid
     },
     {
-      title: 'APPLY FOR SCHOLARSHIP',
-      text: 'Are you a student in need of financial assistance? Our scholarship program offers support to eligible students pursuing higher education.',
+      title: 'APPLY FOR JOB',
+      text: 'Are you looking for exciting career opportunities? Our job openings are available for qualified candidates ready to take the next step in their professional journey. Apply now and join our team!',
       link: '/empowerment', // Your route for Scholarship (create this route if not yet done)
     },
   ].map((item, idx) => (

@@ -46,10 +46,10 @@ const Footer = () => {
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
               <FaFacebookF className="cursor-pointer hover:text-blue-600" />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/socialaidnetorg?s=20" target="_blank" rel="noopener noreferrer">
               <FaTwitter className="cursor-pointer hover:text-blue-600" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/social_aid_network?igsh=MWJmeGN2aTBhdmN1ZA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">
               <FaInstagram className="cursor-pointer hover:text-pink-500" />
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
@@ -78,7 +78,7 @@ const Footer = () => {
           <ul className="space-y-2 text-sm">
             <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Facebook</a></li>
             <li><a href="https://x.com/socialaidnetorg?s=20" target="_blank" rel="noopener noreferrer" className="hover:underline">Twitter</a></li>
-            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Instagram</a></li>
+            <li><a href="https://www.instagram.com/social_aid_network?igsh=MWJmeGN2aTBhdmN1ZA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:underline">Instagram</a></li>
             <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn</a></li>
           </ul>
         </div>
