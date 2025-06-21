@@ -65,7 +65,7 @@ const ContactSection = () => {
             <label className="text-sm font-medium">Your Subject</label>
             <input
               type="text"
-              placeholder="I want to hire you quickly"
+              placeholder="I want to know about your services"
               className="w-full border-b border-gray-300 py-2 outline-none"
             />
           </div>
@@ -74,7 +74,7 @@ const ContactSection = () => {
             <label className="text-sm font-medium">Message</label>
             <textarea
               rows="4"
-              placeholder="Write here your message"
+              placeholder="Write your message here..."
               className="w-full border-b border-gray-300 py-2 outline-none"
             ></textarea>
           </div>
