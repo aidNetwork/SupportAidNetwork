@@ -23,13 +23,13 @@ const ContactSection = () => {
               <FaPhone className="text-white" />
               +8801779717666
             </li>
-            <li className="flex items-center gap-3">
+            {/* <li className="flex items-center gap-3">
               <FaPhone className="text-white" />
               +988678363866
-            </li>
+            </li> */}
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-white" />
-              Support @uprangely.com
+              aidnetwork00@gmail.com
             </li>
             <li className="flex items-center gap-3">
               <FaMapMarkerAlt className="text-white" />

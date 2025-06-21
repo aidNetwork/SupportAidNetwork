@@ -77,7 +77,7 @@ const Footer = () => {
           <h4 className="font-bold mb-4">Support</h4>
           <ul className="space-y-2 text-sm">
             <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Facebook</a></li>
-            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Twitter</a></li>
+            <li><a href="https://x.com/socialaidnetorg?s=20" target="_blank" rel="noopener noreferrer" className="hover:underline">Twitter</a></li>
             <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:underline">Instagram</a></li>
             <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn</a></li>
           </ul>
@@ -98,11 +98,11 @@ const Footer = () => {
         <div>
           <h4 className="font-bold mb-4">Contact Us</h4>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-center gap-2">
+            {/* <li className="flex items-center gap-2">
               <FiPhone /> (91) 98765 4321 54
-            </li>
+            </li> */}
             <li className="flex items-center gap-2">
-              <FiMail /> support@mail.com
+              <FiMail /> aidnetwork00@gmail.com
             </li>
           </ul>
         </div>
