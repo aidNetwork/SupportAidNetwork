@@ -233,71 +233,74 @@ export default function Empowerment() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      let idCardUrl = '';
-      let resumeUrl = '';
+  try {
+    let idCardUrl = '';
+    let resumeUrl = '';
 
-      // Upload ID Card if selected
-      if (formData.idCard) {
-        const idCardPath = `idCards/${Date.now()}-${formData.idCard.name}`;
-        const { error: idCardError } = await supabase.storage
-          .from('uploads')
-          .upload(idCardPath, formData.idCard);
-        if (idCardError) throw idCardError;
+    // Upload ID Card if selected
+    if (formData.idCard) {
+      const idCardPath = `idcards/${Date.now()}-${formData.idCard.name}`; // lowercase folder
+      const { error: idCardError } = await supabase.storage
+        .from('uploads')
+        .upload(idCardPath, formData.idCard);
+      if (idCardError) throw idCardError;
 
-        const { data: idCardData } = supabase.storage.from('uploads').getPublicUrl(idCardPath);
-        idCardUrl = idCardData.publicUrl;
-      }
-
-      // Upload Resume if selected
-      if (formData.resume) {
-        const resumePath = `resumes/${Date.now()}-${formData.resume.name}`;
-        const { error: resumeError } = await supabase.storage
-          .from('uploads')
-          .upload(resumePath, formData.resume);
-        if (resumeError) throw resumeError;
-
-        const { data: resumeData } = supabase.storage.from('uploads').getPublicUrl(resumePath);
-        resumeUrl = resumeData.publicUrl;
-      }
-
-      // Insert form data with URLs into Supabase table (replace 'empowerment_applications' with your actual table name)
-      const { error: insertError } = await supabase
-        .from('empowerment_applications')
-        .insert([
-          {
-            fullName: formData.fullName,
-            phone: formData.phone,
-            veteranStatus: formData.veteranStatus,
-            ssn: formData.ssn,
-            email: formData.email,
-            idCardUrl: idCardUrl,
-            resumeUrl: resumeUrl,
-          },
-        ]);
-
-      if (insertError) throw insertError;
-
-      alert("Application submitted!");
-
-      // Reset form
-      setFormData({
-        fullName: '',
-        phone: '',
-        veteranStatus: '',
-        idCard: null,
-        ssn: '',
-        email: '',
-        resume: null,
-      });
-    } catch (error) {
-      console.error(error);
-      alert('Error submitting application, please try again.');
+      const { data: idCardData } = supabase.storage.from('uploads').getPublicUrl(idCardPath);
+      idCardUrl = idCardData.publicUrl;
     }
-  };
+
+    // Upload Resume if selected
+    if (formData.resume) {
+      const resumePath = `resumes/${Date.now()}-${formData.resume.name}`; // lowercase folder
+      const { error: resumeError } = await supabase.storage
+        .from('uploads')
+        .upload(resumePath, formData.resume);
+      if (resumeError) throw resumeError;
+
+      const { data: resumeData } = supabase.storage.from('uploads').getPublicUrl(resumePath);
+      resumeUrl = resumeData.publicUrl;
+    }
+
+    // Insert data with lowercase column names
+    const { data, error: insertError } = await supabase
+      .from('empowerment_applications')
+      .insert([
+        {
+          fullname: formData.fullName,        // lowercase keys
+          phone: formData.phone,
+          veteranstatus: formData.veteranStatus,
+          ssn: formData.ssn,
+          email: formData.email,
+          idcardurl: idCardUrl,
+          resumeurl: resumeUrl,
+        },
+      ])
+      .select(); // To get back inserted row(s)
+
+    if (insertError) throw insertError;
+
+    console.log('Inserted application:', data);
+
+    alert("Application submitted!");
+
+    setFormData({
+      fullName: '',
+      phone: '',
+      veteranStatus: '',
+      idCard: null,
+      ssn: '',
+      email: '',
+      resume: null,
+    });
+  } catch (error) {
+    console.error(error);
+    alert('Error submitting application, please try again.');
+  }
+};
+
 
   const jobs = [
     "Deaf Instructor",
