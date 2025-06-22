@@ -1,6 +1,21 @@
+import { useState } from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const ContactSection = () => {
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSubmitted(false);
+
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 2000); // Simulated delay
+  };
+
   return (
     <section className="bg-blue-50 py-16 px-4 md:px-20">
       <div className="text-center mb-12">
@@ -12,7 +27,7 @@ const ContactSection = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-10 items-start max-w-5xl mx-auto">
-        {/* Left Box */}
+        {/* Contact Info Box */}
         <div className="bg-blue-600 text-white rounded-xl p-8 shadow-lg">
           <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
           <p className="text-sm mb-6 text-blue-100">
@@ -23,10 +38,6 @@ const ContactSection = () => {
               <FaPhone className="text-white" />
               +8801779717666
             </li>
-            {/* <li className="flex items-center gap-3">
-              <FaPhone className="text-white" />
-              +988678363866
-            </li> */}
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-white" />
               aidnetwork00@gmail.com
@@ -40,8 +51,8 @@ const ContactSection = () => {
           <div className="mt-10 w-36 h-36 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-2xl opacity-40"></div>
         </div>
 
-        {/* Form */}
-        <form className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+        {/* Contact Form */}
+        <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-8 space-y-6">
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium">Your Name</label>
@@ -49,6 +60,7 @@ const ContactSection = () => {
                 type="text"
                 placeholder="John Trengely"
                 className="w-full border-b border-gray-300 py-2 outline-none"
+                required
               />
             </div>
             <div>
@@ -57,6 +69,7 @@ const ContactSection = () => {
                 type="email"
                 placeholder="hello@nurency.com"
                 className="w-full border-b border-gray-300 py-2 outline-none"
+                required
               />
             </div>
           </div>
@@ -67,6 +80,7 @@ const ContactSection = () => {
               type="text"
               placeholder="I want to know about your services"
               className="w-full border-b border-gray-300 py-2 outline-none"
+              required
             />
           </div>
 
@@ -76,15 +90,33 @@ const ContactSection = () => {
               rows="4"
               placeholder="Write your message here..."
               className="w-full border-b border-gray-300 py-2 outline-none"
+              required
             ></textarea>
           </div>
 
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-full transition"
-          >
-            Send Message
-          </button>
+          <div>
+            <button
+              type="submit"
+              className={`flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-full transition w-full sm:w-auto`}
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                  </svg>
+                  Sending...
+                </span>
+              ) : (
+                "Send Message"
+              )}
+            </button>
+
+            {submitted && !loading && (
+              <p className="text-green-600 text-sm mt-4">Message sent successfully!</p>
+            )}
+          </div>
         </form>
       </div>
     </section>
