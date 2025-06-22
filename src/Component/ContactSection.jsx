@@ -5,6 +5,20 @@ const ContactSection = () => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -13,7 +27,13 @@ const ContactSection = () => {
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-    }, 2000); // Simulated delay
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    }, 2000); 
   };
 
   return (
@@ -27,7 +47,7 @@ const ContactSection = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-10 items-start max-w-5xl mx-auto">
-        {/* Contact Info Box */}
+        
         <div className="bg-blue-600 text-white rounded-xl p-8 shadow-lg">
           <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
           <p className="text-sm mb-6 text-blue-100">
@@ -36,7 +56,7 @@ const ContactSection = () => {
           <ul className="space-y-4 text-sm">
             <li className="flex items-center gap-3">
               <FaPhone className="text-white" />
-              +8801779717666
+              +15207626638
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-white" />
@@ -51,13 +71,16 @@ const ContactSection = () => {
           <div className="mt-10 w-36 h-36 bg-gradient-to-br from-white/20 to-white/5 rounded-full blur-2xl opacity-40"></div>
         </div>
 
-        {/* Contact Form */}
+        {/* Form */}
         <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-8 space-y-6">
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium">Your Name</label>
               <input
+                name="name"
                 type="text"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="John Trengely"
                 className="w-full border-b border-gray-300 py-2 outline-none"
                 required
@@ -66,7 +89,10 @@ const ContactSection = () => {
             <div>
               <label className="text-sm font-medium">Your Email</label>
               <input
+                name="email"
                 type="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="hello@nurency.com"
                 className="w-full border-b border-gray-300 py-2 outline-none"
                 required
@@ -77,7 +103,10 @@ const ContactSection = () => {
           <div>
             <label className="text-sm font-medium">Your Subject</label>
             <input
+              name="subject"
               type="text"
+              value={formData.subject}
+              onChange={handleChange}
               placeholder="I want to know about your services"
               className="w-full border-b border-gray-300 py-2 outline-none"
               required
@@ -87,7 +116,10 @@ const ContactSection = () => {
           <div>
             <label className="text-sm font-medium">Message</label>
             <textarea
+              name="message"
               rows="4"
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Write your message here..."
               className="w-full border-b border-gray-300 py-2 outline-none"
               required

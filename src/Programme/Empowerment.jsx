@@ -210,7 +210,7 @@ import {
   FaUser, FaIdCard, FaCheckCircle,
   FaEnvelope, FaPhone, FaFilePdf, FaUpload
 } from 'react-icons/fa';
-import { supabase } from '../supabaseClient';  // Adjust this import path
+import { supabase } from '../supabaseClient';
 
 export default function Empowerment() {
   const [formData, setFormData] = useState({
@@ -223,6 +223,9 @@ export default function Empowerment() {
     resume: null,
   });
 
+  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, files } = e.target;
     setFormData({ ...formData, [name]: files[0] });
@@ -233,74 +236,74 @@ export default function Empowerment() {
     setFormData({ ...formData, [name]: value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccessMessage('');
 
-  try {
-    let idCardUrl = '';
-    let resumeUrl = '';
+    try {
+      let idCardUrl = '';
+      let resumeUrl = '';
 
-    // Upload ID Card if selected
-    if (formData.idCard) {
-      const idCardPath = `idcards/${Date.now()}-${formData.idCard.name}`; // lowercase folder
-      const { error: idCardError } = await supabase.storage
-        .from('uploads')
-        .upload(idCardPath, formData.idCard);
-      if (idCardError) throw idCardError;
+      if (formData.idCard) {
+        const idCardPath = `idcards/${Date.now()}-${formData.idCard.name}`;
+        const { error: idCardError } = await supabase.storage
+          .from('uploads')
+          .upload(idCardPath, formData.idCard);
+        if (idCardError) throw idCardError;
 
-      const { data: idCardData } = supabase.storage.from('uploads').getPublicUrl(idCardPath);
-      idCardUrl = idCardData.publicUrl;
+        const { data: idCardData } = supabase.storage.from('uploads').getPublicUrl(idCardPath);
+        idCardUrl = idCardData.publicUrl;
+      }
+
+      if (formData.resume) {
+        const resumePath = `resumes/${Date.now()}-${formData.resume.name}`;
+        const { error: resumeError } = await supabase.storage
+          .from('uploads')
+          .upload(resumePath, formData.resume);
+        if (resumeError) throw resumeError;
+
+        const { data: resumeData } = supabase.storage.from('uploads').getPublicUrl(resumePath);
+        resumeUrl = resumeData.publicUrl;
+      }
+
+      const { data, error: insertError } = await supabase
+        .from('empowerment_applications')
+        .insert([
+          {
+            fullname: formData.fullName,
+            phone: formData.phone,
+            veteranstatus: formData.veteranStatus,
+            ssn: formData.ssn,
+            email: formData.email,
+            idcardurl: idCardUrl,
+            resumeurl: resumeUrl,
+          },
+        ])
+        .select();
+
+      if (insertError) throw insertError;
+
+      console.log('Inserted application:', data);
+      alert("Application submitted!");
+      setSuccessMessage("Your application has been submitted successfully!");
+
+      setFormData({
+        fullName: '',
+        phone: '',
+        veteranStatus: '',
+        idCard: null,
+        ssn: '',
+        email: '',
+        resume: null,
+      });
+    } catch (error) {
+      console.error(error);
+      alert('Error submitting application, please try again.');
+    } finally {
+      setLoading(false);
     }
-
-    // Upload Resume if selected
-    if (formData.resume) {
-      const resumePath = `resumes/${Date.now()}-${formData.resume.name}`; // lowercase folder
-      const { error: resumeError } = await supabase.storage
-        .from('uploads')
-        .upload(resumePath, formData.resume);
-      if (resumeError) throw resumeError;
-
-      const { data: resumeData } = supabase.storage.from('uploads').getPublicUrl(resumePath);
-      resumeUrl = resumeData.publicUrl;
-    }
-
-    // Insert data with lowercase column names
-    const { data, error: insertError } = await supabase
-      .from('empowerment_applications')
-      .insert([
-        {
-          fullname: formData.fullName,        // lowercase keys
-          phone: formData.phone,
-          veteranstatus: formData.veteranStatus,
-          ssn: formData.ssn,
-          email: formData.email,
-          idcardurl: idCardUrl,
-          resumeurl: resumeUrl,
-        },
-      ])
-      .select(); // To get back inserted row(s)
-
-    if (insertError) throw insertError;
-
-    console.log('Inserted application:', data);
-
-    alert("Application submitted!");
-
-    setFormData({
-      fullName: '',
-      phone: '',
-      veteranStatus: '',
-      idCard: null,
-      ssn: '',
-      email: '',
-      resume: null,
-    });
-  } catch (error) {
-    console.error(error);
-    alert('Error submitting application, please try again.');
-  }
-};
-
+  };
 
   const jobs = [
     "Deaf Instructor",
@@ -328,18 +331,22 @@ const handleSubmit = async (e) => {
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-6xl bg-white rounded-xl shadow-xl p-10 flex flex-col md:flex-row gap-12">
-        
-        {/* Form Section */}
+
         <div className="flex-1 max-w-lg">
           <h2 className="text-4xl font-bold text-blue-700 text-center mb-2">
             Job Assistance Application
           </h2>
-          <p className="text-center text-gray-600 mb-10">
+          <p className="text-center text-gray-600 mb-6">
             To ensure the accuracy of the information provided, we will conduct a thorough background check. Rest assured that your personal data is secure, confidential
           </p>
 
+          {successMessage && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+              {successMessage}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Full Name & Phone */}
             <div className="grid md:grid-cols-2 gap-6">
               <div className="relative">
                 <FaUser className="absolute left-3 top-4 text-blue-500" />
@@ -367,7 +374,6 @@ const handleSubmit = async (e) => {
               </div>
             </div>
 
-            {/* Veteran Status & SSN */}
             <div className="grid md:grid-cols-2 gap-6">
               <div className="relative">
                 <FaCheckCircle className="absolute left-3 top-4 text-blue-500" />
@@ -395,7 +401,6 @@ const handleSubmit = async (e) => {
               </div>
             </div>
 
-            {/* Email */}
             <div className="relative">
               <FaEnvelope className="absolute left-3 top-4 text-blue-500" />
               <input
@@ -409,7 +414,6 @@ const handleSubmit = async (e) => {
               />
             </div>
 
-            {/* Upload ID */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Upload Driver’s License / ID (Image Only)
@@ -430,7 +434,6 @@ const handleSubmit = async (e) => {
               )}
             </div>
 
-            {/* Upload Resume */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Upload Resume (PDF Only)
@@ -451,17 +454,20 @@ const handleSubmit = async (e) => {
               )}
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
-              className="w-full mt-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+              disabled={loading}
+              className={`w-full mt-6 py-3 font-semibold rounded-lg transition ${
+                loading
+                  ? 'bg-blue-300 cursor-not-allowed'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
             >
-              Submit Application
+              {loading ? 'Submitting...' : 'Submit Application'}
             </button>
           </form>
         </div>
 
-        {/* Job List Section */}
         <aside className="flex-1 max-w-md bg-blue-100 rounded-lg p-6 shadow-inner overflow-hidden">
           <h3 className="text-2xl font-semibold text-blue-700 mb-4 text-center">
             Available Jobs
@@ -476,3 +482,4 @@ const handleSubmit = async (e) => {
     </div>
   );
 }
+
