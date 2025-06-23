@@ -56,7 +56,7 @@ const ContactSection = () => {
           <ul className="space-y-4 text-sm">
             <li className="flex items-center gap-3">
               <FaPhone className="text-white" />
-              +15207626638
+              +1 520-762-6638
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-white" />

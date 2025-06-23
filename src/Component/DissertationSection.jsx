@@ -98,19 +98,19 @@ const DissertationSection = () => {
         </div>
       </div>
 
-      {/* Bottom Cards */}
+      
 
 <div className="mt-16 grid md:grid-cols-2 gap-8">
   {[
     {
       title: 'APPLY FOR MOBILITY AID',
       text: 'Are you or a loved one in need of mobility assistance? Our program provides free or low-cost mobility aids, such as wheelchairs, walkers, and prosthetic devices, to eligible individuals in the United States.',
-      link: '/mobility', // Your route for Mobility Aid
+      link: '/mobility', 
     },
     {
-      title: 'APPLY FOR JOB',
+      title: 'APPLY FOR A JOB',
       text: 'Are you looking for exciting career opportunities? Our job openings are available for qualified candidates ready to take the next step in their professional journey. Apply now and join our team!',
-      link: '/empowerment', // Your route for Scholarship (create this route if not yet done)
+      link: '/empowerment', 
     },
   ].map((item, idx) => (
     <div
