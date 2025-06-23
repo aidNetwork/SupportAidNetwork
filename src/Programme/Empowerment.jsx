@@ -337,7 +337,7 @@ export default function Empowerment() {
             Job Assistance Application
           </h2>
           <p className="text-center text-gray-600 mb-6">
-            To ensure the accuracy of the information provided, we will conduct a thorough background check. Rest assured that your personal data is secure, confidential
+            To ensure the accuracy of the information provided, we will conduct a thorough background check. Rest assured that your personal data is secure, confidential,Benefit includes health insurance coverage, flexible work schedules, debt Relief, sick leave, life and disability Insurance.
           </p>
 
           {successMessage && (
