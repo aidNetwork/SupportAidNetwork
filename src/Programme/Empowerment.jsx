@@ -325,7 +325,8 @@ export default function Empowerment() {
     "Board members",
     "Team directors",
     "Marketing directors",
-    "Programming",
+    "Programming le",
+
   ];
 
   return (
