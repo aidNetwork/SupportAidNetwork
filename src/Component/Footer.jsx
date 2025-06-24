@@ -102,7 +102,7 @@ const Footer = () => {
               <FiPhone />+1 520-762-6638
             </li>
             <li className="flex items-center gap-2">
-              <FiMail /> aidnetwork00@gmail.com
+              <FiMail /> info@supportaidnetwork.org
             </li>
           </ul>
         </div>
