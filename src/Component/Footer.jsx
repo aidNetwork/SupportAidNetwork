@@ -98,9 +98,9 @@ const Footer = () => {
         <div>
           <h4 className="font-bold mb-4">Contact Us</h4>
           <ul className="space-y-3 text-sm">
-            {/* <li className="flex items-center gap-2">
-              <FiPhone /> (91) 98765 4321 54
-            </li> */}
+            <li className="flex items-center gap-2">
+              <FiPhone />+1 520-762-6638
+            </li>
             <li className="flex items-center gap-2">
               <FiMail /> aidnetwork00@gmail.com
             </li>

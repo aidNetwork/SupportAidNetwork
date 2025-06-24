@@ -116,7 +116,7 @@ export default function Mobility() {
             </button>
 
             {submitted && !loading && (
-              <p className="text-green-600 mt-4 text-sm font-semibold">Application submitted successfully!</p>
+              <p className="text-green-600 mt-4 text-sm font-semibold">Thank you for your application. We've received it and will be in touch soon.</p>
             )}
           </div>
         </form>
