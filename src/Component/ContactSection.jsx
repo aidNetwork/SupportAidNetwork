@@ -60,7 +60,7 @@ const ContactSection = () => {
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-white" />
-              aidnetwork00@gmail.com
+              info@supportaidnetwork.org
             </li>
             <li className="flex items-center gap-3">
               <FaMapMarkerAlt className="text-white" />
