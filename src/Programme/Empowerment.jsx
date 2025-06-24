@@ -286,7 +286,7 @@ export default function Empowerment() {
 
       console.log('Inserted application:', data);
       alert("Application submitted!");
-      setSuccessMessage("Your application has been submitted successfully!");
+      setSuccessMessage("Thank you for your application. We've received it and will be in touch soon.");
 
       setFormData({
         fullName: '',
