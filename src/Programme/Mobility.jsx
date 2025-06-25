@@ -112,7 +112,7 @@
 //                   </svg>
 //                   Submitting...
 //                 </span>
-//               ) : submitted ? "Submitted ✅" : "Submit Application"}
+//               ) : submitted ? "Submitted" : "Submit Application"}
 //             </button>
 
 //             {submitted && !loading && (
