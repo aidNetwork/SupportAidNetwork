@@ -10,8 +10,12 @@ const About = lazy(() => import('./Pages/About'));
 const Services = lazy(() => import('./Pages/Services')); // Ensure correct import
 const OurWork = lazy(() => import('./Pages/OurWork'));
 const Contact = lazy(() => import('./Pages/Contact'));
+const Team = lazy(() => import('./Pages/Team'))
+const History = lazy(() => import('./Pages/History'))
+const GalleryPage = lazy(() => import('./Pages/GalleryPage'))
 const Empowerment = lazy(() => import('./Programme/Empowerment'));
 const Mobility = lazy(() => import('./Programme/Mobility'));
+const MobilityShop = lazy(() => import('./Programme/MobilityShop'));
 
 // ScrollToTop with smooth scroll
 const ScrollToTop = () => {
@@ -45,8 +49,12 @@ const App = () => {
           <Route path="/services" element={<Services key={location.key} />} />
           <Route path="/our-work" element={<OurWork key={location.key} />} />
           <Route path="/contact" element={<Contact key={location.key} />} />
+          <Route path="/team" element={<Team key={location.key} />} />
+          <Route path="/history" element={<History key={location.key} />} />
+          <Route path="/gallery" element={<GalleryPage key={location.key} />} />
           <Route path="/empowerment" element={<Empowerment key={location.key} />} />
           <Route path="/mobility" element={<Mobility key={location.key} />} />
+          <Route path="/mobility-shop" element={<MobilityShop key={location.key} />} />
         </Routes>
       </Suspense>
 
