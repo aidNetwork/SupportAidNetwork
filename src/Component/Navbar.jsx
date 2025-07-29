@@ -15,12 +15,15 @@ const Navbar = () => {
     { name: 'About', path: '/about' },
     { name: 'Our Work', path: '/our-work' },
     { name: 'Our Programme', dropdown: true },
-    { name: 'Contact Us', path: '/contact' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Team', path: '/team' },
+    { name: 'History', path: '/history' },
   ];
 
   const programmeLinks = [
   { name: 'Empowerment', path: '/empowerment' },
   { name: 'Mobility Support', path: '/mobility' },
+  { name: 'Mobility Shop', path: '/mobility-shop' },
 ];
 
   useEffect(() => {
