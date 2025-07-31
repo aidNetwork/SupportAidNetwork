@@ -134,11 +134,7 @@ export default function Empowerment() {
             <br />Benefit includes health insurance coverage, flexible work schedules, debt relief, sick leave, life and disability insurance.
           </p>
 
-          {successMessage && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-              {successMessage}
-            </div>
-          )}
+         
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
@@ -166,6 +162,11 @@ export default function Empowerment() {
               {loading ? 'Submitting...' : 'Submit Application'}
             </button>
           </form>
+           {successMessage && (
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+              {successMessage}
+            </div>
+          )}
         </div>
       </div>
     </div>
