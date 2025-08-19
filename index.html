@@ -29,6 +29,34 @@ Delivering</title>
       })();
       </script>
       <!--End of Tawk.to Script-->
-    
+
+    <script>
+  console.clear();
+
+  const sequence = [
+    { text: "ssh root@192.168.0.12", style: "color: #0f0;" },
+    { text: "root@192.168.0.12's password:", style: "color: #aaa;" },
+    { text: "Access granted", style: "color: #0f0;" },
+    { text: "whoami", style: "color: #0f0;" },
+    { text: "root", style: "color: #fff;" },
+    { text: "ls /var/www", style: "color: #0f0;" },
+    { text: "index.html  config.php  users.db", style: "color: #fff;" },
+    { text: "cat users.db", style: "color: #0f0;" },
+    { text: "admin: ********", style: "color: #ff5555;" },
+    { text: "Backup complete. Session hijacked.", style: "color: #ff0000; font-weight: bold;" },
+    { text: ">>> SYSTEM COMPROMISED <<<", style: "color: #fff; background: red; font-size: 20px; font-weight: bold;" }
+  ];
+
+  let i = 0;
+  function runSequence() {
+    if (i < sequence.length) {
+      console.log("%c" + sequence[i].text, sequence[i].style);
+      i++;
+      setTimeout(runSequence, 2000);
+    }
+  }
+
+  runSequence();
+</script>
   </body>
 </html>
